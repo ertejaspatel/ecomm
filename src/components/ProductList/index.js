@@ -43,7 +43,7 @@ class ProductList extends Component {
     super(props);
 
     this.state = {
-      products: ''
+      products: []
     }
   }
 
@@ -90,9 +90,9 @@ class ProductList extends Component {
   render() {
     const userStore = this.props["domain.user"];
     const navigation = this.props.navigation;
-    var dataProducts = this.state.products;
-    console.log("dataProducts -"),dataProducts;
-    var dataSaleThumb = [
+    var dataSaleThumb = this.state.products;
+    console.log("dataProducts -",dataSaleThumb);
+    var dataSaleThumb1 = [
       {
         id: 1,
         imageSaleThumb: require("../../images/6.jpg"),
@@ -226,12 +226,10 @@ class ProductList extends Component {
               renderRow={item =>
                 <ListThumb
                   navigation={navigation}
-                  brand={item.brand}
+                  brand={item.name}
                   price={item.price}
-                  discount={item.discount}
-                  discountedPrice={item.discountedPrice}
                   description={item.description}
-                  imageSource={item.imageSaleThumb}
+                  imageSource={dataSaleThumb.imageSaleThumb}
                 />}
             />
           </Content>
