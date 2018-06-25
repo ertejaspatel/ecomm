@@ -34,11 +34,64 @@ import SortRefine from "../CommonComponents/SortRefine";
 import Style from "./style.js";
 import MyFooter from "../CommonComponents/Footer";
 
+import * as globals from '../../lib/globals';
+import { API } from '../../lib/api';
+
 @inject("routerActions")
 class ProductList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      products: ''
+    }
+  }
+
+  componentDidMount() {
+    let data = {
+      username: globals.adminUsername,
+      password: globals.adminPassword
+    };
+
+    API.getAdminToken(this.adminTokenResponse, data);
+  }
+
+  adminTokenResponse = {
+    success: (response) => {
+      console.log("token -", response);
+      this.productList(response);
+    },
+    error: (response) => {
+      console.log("error -", response);
+    }
+  }
+
+  productList = (param) => {
+    let data = {
+      Authorization : 'Bearer ' + param
+    };
+
+    API.getProductList(this.productListResponse, data);
+  }
+
+  productListResponse = {
+    success: (response) => {
+      console.log("token -", response.items);
+      this.setState({
+        products: response.items
+      })
+    },
+    error: (response) => {
+      console.log("error -", response);
+    }
+  }
+
+
   render() {
     const userStore = this.props["domain.user"];
     const navigation = this.props.navigation;
+    var dataProducts = this.state.products;
+    console.log("dataProducts -"),dataProducts;
     var dataSaleThumb = [
       {
         id: 1,

@@ -1,21 +1,31 @@
 const URL = 'http://mybookvilla.com/rest/V1/';
+const ADMIN_URL = 'http://mybookvilla.com/rest/default/V1/';
 
 //customer 
 const URL_LOGIN_CUSTOMER = URL + 'integration/customer/token';
 const URL_CUSTOMER_DETAILS = URL + 'customers/me';
+const URL_PRODUCT_LIST = URL + 'products?searchCriteria';
+const URL_ADMIN_TOKEN = ADMIN_URL + 'integration/admin/token';
 
 export const API = {
     login: (onResponse, data) => {
-        console.log("data -", data);
         request(onResponse, data, 'POST', URL_LOGIN_CUSTOMER);
     },
+    getAdminToken : (onResponse, data) => {
+        request(onResponse, data, 'POST', URL_ADMIN_TOKEN);
+    },
     getCustomerDetails: (onResponse, data) => {
-        console.log("data -", data);
         let headers = {
             Authorization : data.Authorization
         }
         request(onResponse, data, 'GET', URL_CUSTOMER_DETAILS, headers);
     },
+    getProductList: (onResponse, data) => {
+        let headers = {
+            Authorization : data.Authorization
+        }
+        request(onResponse, data, 'GET', URL_PRODUCT_LIST, headers);
+    }
 
 };
 
@@ -69,15 +79,11 @@ async function request(onResponse, data, type, featureURL, secureRequest = build
 
 
         if (responseJSON) {
-            console.log("success -", responseJSON);
             onResponse.success(responseJSON);
         } else {
-            console.log("eror", responseJSON);
             onResponse.error(responseJSON);
         }
     } catch (error) {
-        //error = "Error: In api catch";
-        console.log("catch -", error);
         error = "Network Error, Please check your Network connection";
         onResponse.error(error);
         if (onResponse.complete) {
