@@ -23,14 +23,17 @@ import IconMI from 'react-native-vector-icons/MaterialIcons';
 class ListThumb extends Component {
   render() {
     const navigation = this.props.navigation;
-    // var imageSource = require("../../../assets/images/saleThumb1.png");
     var thumbWidth = deviceWidth/2;
     var thumbHeight = (deviceHeight/2)-5;
+  
+    
     return (
       <View style={{height: thumbHeight, width: thumbWidth}}>
         <Card style={{ shadowOpacity: 0, margin:0}}>
-          <CardItem button onPress={() => navigation.navigate("ProductPage")} style={{flex: 1, flexDirection: 'column',padding:0}}>
-            <Image style={{flex: 3,resizeMode: 'contain'}} source={this.props.imageSource}/>
+          <CardItem button onPress={() => navigation.navigate("ProductPage",{
+            sku : this.props.productSku
+          })} style={{flex: 1, flexDirection: 'column',padding:0}}>
+            <Image style={{flex: 3,resizeMode: 'contain', height:100, width:100}} source={{uri: "https://www.sandler.com/sites/default/files/styles/large/public/Rules%20book%20301Wx197H.png"}}/>
             <View style={{flex: 1, flexDirection: 'row', paddingLeft: 10,  width: thumbWidth}}>
               <View>
                 <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between', width: thumbWidth, marginTop: 10}}>

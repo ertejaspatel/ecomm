@@ -6,6 +6,7 @@ const URL_LOGIN_CUSTOMER = URL + 'integration/customer/token';
 const URL_CUSTOMER_DETAILS = URL + 'customers/me';
 const URL_PRODUCT_LIST = URL + 'products?searchCriteria';
 const URL_ADMIN_TOKEN = ADMIN_URL + 'integration/admin/token';
+const URL_PRODUCT_DETAIL = URL + 'products/';
 
 export const API = {
     login: (onResponse, data) => {
@@ -25,6 +26,13 @@ export const API = {
             Authorization : data.Authorization
         }
         request(onResponse, data, 'GET', URL_PRODUCT_LIST, headers);
+    },
+    getProductDetails : (onResponse, data) => {
+        let headers = {
+            Authorization : data.Authorization
+        }
+        let urlProduct = URL_PRODUCT_DETAIL + data.productSku;
+        request(onResponse, data, 'GET', urlProduct, headers);
     }
 
 };

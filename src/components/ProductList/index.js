@@ -37,7 +37,7 @@ import MyFooter from "../CommonComponents/Footer";
 import * as globals from '../../lib/globals';
 import { API } from '../../lib/api';
 
-@inject("routerActions")
+@inject("view.app", "domain.user", "app", "routerActions")
 class ProductList extends Component {
   constructor(props) {
     super(props);
@@ -59,7 +59,10 @@ class ProductList extends Component {
   adminTokenResponse = {
     success: (response) => {
       console.log("token -", response);
+      let adminTokenObj = this.props["domain.user"];
+      adminTokenObj.adminToken = response;
       this.productList(response);
+      
     },
     error: (response) => {
       console.log("error -", response);
@@ -92,10 +95,12 @@ class ProductList extends Component {
     const navigation = this.props.navigation;
     var dataSaleThumb = this.state.products;
     console.log("dataProducts -",dataSaleThumb);
+
+    var imageBookIcon = 'https://www.sandler.com/sites/default/files/styles/large/public/Rules%20book%20301Wx197H.png?itok=R0zVN37u';
     var dataSaleThumb1 = [
       {
         id: 1,
-        imageSaleThumb: require("../../images/6.jpg"),
+        imageSaleThumb: 'https://www.sandler.com/sites/default/files/styles/large/public/Rules%20book%20301Wx197H.png?itok=R0zVN37u',
         brand: "Blackberrys",
         price: "$1,299",
         discount: "$500",
@@ -229,7 +234,8 @@ class ProductList extends Component {
                   brand={item.name}
                   price={item.price}
                   description={item.description}
-                  imageSource={dataSaleThumb.imageSaleThumb}
+                  imageSource={imageBookIcon}
+                  productSku = {item.sku}
                 />}
             />
           </Content>

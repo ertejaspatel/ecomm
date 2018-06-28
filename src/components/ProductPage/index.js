@@ -40,6 +40,8 @@ var deviceWidth = Dimensions.get("window").width;
 var deviceHeight = Dimensions.get("window").height;
 import ThemeHeader from "../CommonComponents/Header";
 import ListDropdown from "../CommonComponents/ListDropdown";
+import { API } from '../../lib/api';
+
 @inject("view.app", "domain.user", "app", "routerActions")
 @observer
 class ProductPage extends Component {
@@ -52,8 +54,32 @@ class ProductPage extends Component {
       button2: false,
       button3: false,
       button4: false,
-      modalVisible: false
+      modalVisible: false,
+      productDetails: {}
     };
+  }
+
+  componentDidMount() {
+    let admin = this.props["domain.user"];
+
+    let data = {
+      Authorization: 'Bearer ' + admin.adminToken,
+      productSku: this.props.navigation.state.params.sku
+    };
+
+    API.getProductDetails(this.productDetailsResponse, data);
+  }
+
+  productDetailsResponse = {
+    success: (response) => {
+      this.setState({
+        productDetails: response
+      })
+      console.log("product Details -", response);
+    },
+    error: (response) => {
+      console.log("error -", response);
+    }
   }
 
   setModalVisible(visible) {
@@ -160,13 +186,13 @@ class ProductPage extends Component {
           </View>
           <List>
             <View style={{ marginTop: 15 }}>
-              <Text style={styles.productName}> Black Leather Jacket</Text>
+              <Text style={styles.productName}>{this.state.productDetails.name}</Text>
             </View>
             <ListItem style={{ marginLeft: 0, paddingLeft: 10 }}>
               <View style={{ flexDirection: "row" }}>
-                <Text style={styles.price}> $1,499</Text>
-                <Text style={styles.cutOffPrice}> $2,499</Text>
-                <Text style={styles.discount}> 40% off</Text>
+                <Text style={styles.price}>₹ {this.state.productDetails.price}</Text>
+                {/* <Text style={styles.cutOffPrice}> $2,499</Text>
+                <Text style={styles.discount}> 40% off</Text> */}
               </View>
             </ListItem>
             <ListItem button style={{ marginLeft: 0, paddingLeft: 10 }}>
