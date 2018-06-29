@@ -200,53 +200,7 @@ class ProductPage extends Component {
               <Text style={styles.tagText}> Tap to get the best price</Text>
             </ListItem>
           </List>
-          <View style={{ paddingTop: 10 }}>
-            <View style={styles.sizeView}>
-              <View style={styles.sizeView1}>
-                <IconMCI name="ruler" style={styles.rulerIcon} />
-              </View>
-              <View style={styles.sizeView2}>
-                <Text style={styles.sizeText}> Size </Text>
-              </View>
-              <View style={styles.sizeView3}>
-                <Text style={styles.chartText}>SIZE CHART</Text>
-              </View>
-            </View>
-            <View style={styles.sizeButtons}>
-              <TouchableOpacity
-                style={!this.state.button1 ? styles.sizes : styles.sizesAlt}
-                onPress={() => this.toggle1()}
-              >
-                <Text style={!this.state.button1 ? {} : { color: "#7468C5" }}>
-                  S
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={!this.state.button2 ? styles.sizes : styles.sizesAlt}
-                onPress={() => this.toggle2()}
-              >
-                <Text style={!this.state.button2 ? {} : { color: "#7468C5" }}>
-                  M
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={!this.state.button3 ? styles.sizes : styles.sizesAlt}
-                onPress={() => this.toggle3()}
-              >
-                <Text style={!this.state.button3 ? {} : { color: "#7468C5" }}>
-                  L
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={!this.state.button4 ? styles.sizes : styles.sizesAlt}
-                onPress={() => this.toggle4()}
-              >
-                <Text style={!this.state.button4 ? {} : { color: "#7468C5" }}>
-                  XL
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          {/*   */}
           <View>
             <Tabs style={{ paddingHorizontal: 0 }}>
               <Tab heading="DETAILS" style={{ padding: 10 }}>
