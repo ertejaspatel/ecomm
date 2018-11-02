@@ -1,5 +1,5 @@
-const URL = 'http://mybookvilla.com/rest/V1/';
-const ADMIN_URL = 'http://mybookvilla.com/rest/default/V1/';
+const URL = 'http://test.com/rest/V1/';
+const ADMIN_URL = 'http://test.com/rest/default/V1/';
 
 //customer 
 const URL_LOGIN_CUSTOMER = URL + 'integration/customer/token';
